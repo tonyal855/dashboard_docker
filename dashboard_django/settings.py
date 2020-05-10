@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'dashboard_docker',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

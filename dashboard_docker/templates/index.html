@@ -1,0 +1,81 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Docker</title>
+    <link rel="stylesheet" href="{% static 'dashboard_docker/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard_docker/font-awesome/css/font-awesome.min.css' %}">
+</head>
+<body>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Dashboard Docker</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Container </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/get_images">Images</a>
+          </li>
+
+        </ul>
+      </div>
+    </nav>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Images</th>
+          <th scope="col">Status</th>
+          <th scope="col">Port</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for container in data %}
+        <tr>
+          <th>{{ container.id }}</th>
+          <td>{{ container.image }}</td>
+          <td>{{ container.status }}</td>
+          <td>{{ container.ports }}</td>
+          <td>
+           <a class="btn btn-sm btn-outline-primary" href="start?id={{ container.id }}">Start</a>
+           <a class="btn btn-sm btn-outline-warning" href="stop?id={{ container.id }}">Stop</a>
+           <a class="btn btn-sm btn-outline-danger" href="delete?id={{ container.id }}">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+
+    <div class="col-md-6">
+        <h4>Add Container</h4>
+        <form method="post">
+         {% csrf_token %}
+        <div class="row">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Image" name="image">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Port Container" name="port_container">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Port Host" name="port_host">
+            </div>
+        </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <script src="{% static 'dashboard_docker/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'dashboard_docker/popper.min.js' %}"></script>
+    <script src="{% static 'dashboard_docker/bootstrap.min.js' %}"></script>
+</body>
+</html>
