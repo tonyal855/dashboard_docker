@@ -1,10 +1,10 @@
 dashboard docker
 
 sebelum menjalankan aplikasi ini harus install:
--docker
--python3
--pip3
--git
+docker,
+python3,
+pip3,
+git
 
 download aplikasi di:
 
